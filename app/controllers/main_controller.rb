@@ -8,12 +8,12 @@ class MainController < ApplicationController
 
   def search
     @word = params[:word]
-    @filename = 'old_file.txt'
+    @filename = params[:file]
     @email = params[:email]
 
-    Resque.enqueue(ResqueTestJob, @word, @filename, @email)
+    Resque.enqueue(ResqueTestJob, @filename, @word, @email)
 
-    redirect_to '/main', :notice => "File '" << @word << ".txt' has been generated"
+    redirect_to '/main', :notice => "New file has been generated and sended to '#{@email}'"
   end
 
 end

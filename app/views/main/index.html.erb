@@ -2,6 +2,9 @@
 
 <%= form_for @word, :url => url_for(:controller => 'main', :action => 'search') do |f| %>
 
+    <p>Search file:</p>
+    <p><%= file_field_tag :file %></p>
+
     <p>Search word:</p>
     <p><%= f.text_field :word %></p>
 

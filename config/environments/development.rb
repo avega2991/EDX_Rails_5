@@ -18,9 +18,7 @@ EdxFive::Application.configure do
   config.action_mailer.default_url_options = {:host => 'localhost:3000'}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true # If set to false, mail will be not delivered in
-
   config.action_mailer.default :charset => "utf-8"
-
   config.action_mailer.smtp_settings = {
       address: "smtp.gmail.com",
       port: 587,

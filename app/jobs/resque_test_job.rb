@@ -8,7 +8,7 @@ class ResqueTestJob
 
     @string_array = Array.new
 
-    File.open("#{Rails.root}/old_file.txt", 'r') do |file|
+    File.open("#{Rails.root}/#{filename}", 'r') do |file|
       while (line = file.gets) do
 
         if (line =~ /(\s+|^)#{search_word}(\s+|$)/)
@@ -18,13 +18,16 @@ class ResqueTestJob
       end
     end
 
-    File.open(filename, 'w') do |file|
+    @new_filename = 'new_file.txt'
+    new_file = File.new(@new_filename, 'w')
+
+    File.open(new_file, 'w') do |file|
       @string_array.each do |string|
         file.write string
       end
     end
 
-    MyMailer.welcome_email(email, filename).deliver!
+    MyMailer.welcome_email(email, @new_filename).deliver!
 
     puts "Mail has been sended"
 
