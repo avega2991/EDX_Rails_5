@@ -1,16 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<%= form_for @word, :url => url_for(:controller => 'main', :action => 'search') do |f| %>
+<%= form_tag({:action => 'search'}, multipart: true) do %>
 
-    <p>Search file:</p>
     <p><%= file_field_tag :file %></p>
 
-    <p>Search word:</p>
-    <p><%= f.text_field :word %></p>
+    <p><%= label_tag("Search word:") %></p>
+    <p><%= text_field_tag :word, params[:word] %></p>
 
-    <p>Email:</p>
-    <p><%= f.text_field :email %></p>
+    <p><%= label_tag("Email:") %></p>
+    <p><%= text_field_tag :email, params[:email] %></p>
 
-    <p><%= f.submit "Execute" %></p>
+    <p><%= submit_tag("Execute") %></p>
 
 <% end %>

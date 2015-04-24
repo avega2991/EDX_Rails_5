@@ -3,7 +3,7 @@ class MyMailer < ActionMailer::Base
 
   def welcome_email(email, filename)
 
-    attachments["#{filename}"] = File.read("#{Rails.root}/#{filename}")
+    attachments["#{filename}"] = File.read("#{filename}")
 
     mail(to: email, subject: 'Resque test application mail')
 

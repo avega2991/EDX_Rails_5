@@ -8,7 +8,7 @@ class ResqueTestJob
 
     @string_array = Array.new
 
-    File.open("#{Rails.root}/#{filename}", 'r') do |file|
+    File.open("#{filename}", 'r') do |file|
       while (line = file.gets) do
 
         if (line =~ /(\s+|^)#{search_word}(\s+|$)/)
@@ -18,7 +18,7 @@ class ResqueTestJob
       end
     end
 
-    @new_filename = 'new_file.txt'
+    @new_filename = "/tmp/new_file.txt"
     new_file = File.new(@new_filename, 'w')
 
     File.open(new_file, 'w') do |file|

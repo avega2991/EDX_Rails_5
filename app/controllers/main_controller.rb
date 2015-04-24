@@ -1,14 +1,11 @@
-require_relative '../jobs/resque_test_job'
-
 class MainController < ApplicationController
 
   def index
-    @word = String.new
   end
 
   def search
     @word = params[:word]
-    @filename = params[:file]
+    @filename = params[:file].path
     @email = params[:email]
 
     Resque.enqueue(ResqueTestJob, @filename, @word, @email)
