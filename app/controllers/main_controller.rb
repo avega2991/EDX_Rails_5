@@ -8,9 +8,16 @@ class MainController < ApplicationController
     @filename = params[:file].path
     @email = params[:email]
 
-    Resque.enqueue(ResqueTestJob, @filename, @word, @email)
+    @job_id = ResqueTestJob.create(:filename => @filename, :word => @word, :email => @email)
 
-    redirect_to '/main', :notice => "New file has been generated and sended to '#{@email}'"
+    params_hash = { :job_id => "#{@job_id}", :notice => "Job ##{@job_id} has been enqueued" }
+
+    redirect_to "/main/index?#{params_hash.to_param}"
+  end
+
+  def status
+    @job_id = params[:job_id]
+    @job_hash = Resque::Plugins::Status::Hash.get(@job_id)
   end
 
 end

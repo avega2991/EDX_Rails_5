@@ -1,0 +1,15 @@
+<script>
+  $(document).ready(
+          function(){
+              setInterval('window.location.reload()', 4000);
+          }
+  )
+</script>
+
+<div class="resque-status">
+    <p>Job id : <%= @job_id %></p>
+    <p>Status: <%= @job_hash.status %></p>
+    <p>Queued: <%= @job_hash.queued? %></p>
+    <p>Working: <%= @job_hash.working? %></p>
+    <p>Message: <%= @job_hash.message %></p>
+</div>

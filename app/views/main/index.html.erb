@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<p id="notice"><%= link_to notice, :action => 'status', :job_id => params[:job_id] %></p>
 
 <%= form_tag({:action => 'search'}, multipart: true) do %>
 
@@ -13,3 +13,5 @@
     <p><%= submit_tag("Execute") %></p>
 
 <% end %>
+
+<div class="resque-status" id="resque-status"></div>

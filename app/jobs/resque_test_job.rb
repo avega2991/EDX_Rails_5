@@ -1,17 +1,18 @@
 require_relative '../mailers/my_mailer'
 
 class ResqueTestJob
+  include Resque::Plugins::Status
 
   @queue = :resque_test
 
-  def self.perform(filename, search_word, email)
+  def perform
 
     @string_array = Array.new
 
-    File.open("#{filename}", 'r') do |file|
+    File.open("#{options['filename']}", 'r') do |file|
       while (line = file.gets) do
 
-        if (line =~ /(\s+|^)#{search_word}(\s+|$)/)
+        if (line =~ /(\s+|^)#{options['word']}(\s+|$)/)
           @string_array.push(line)
         end
 
@@ -27,7 +28,7 @@ class ResqueTestJob
       end
     end
 
-    MyMailer.welcome_email(email, @new_filename).deliver!
+    MyMailer.welcome_email(options['email'], @new_filename).deliver!
 
     puts "Mail has been sended"
 
